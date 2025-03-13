@@ -118,25 +118,3 @@ def runningtime_categories(df, user_key):
     df_final['category_2d'] = df_final['time_type2'] - df_final['time_type1']
 
     return df_final
-
-
-def main():
-    try:
-        # 유저 키 불러오기
-        user_key = load_user_key()
-
-        # 찜한 영화 목록 스크래핑
-        contents = scrape_wishes(user_key)
-
-        # 데이터 업데이트
-        df = update_data(user_key, contents)
-
-        # 러닝타임 카테고리 생성 후 저장
-        runningtime_categories(df, user_key)
-
-    except Exception as e:
-        print(f"🚨 오류 발생: {e}")
-
-
-if __name__ == "__main__":
-    main()
