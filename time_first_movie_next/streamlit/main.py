@@ -10,21 +10,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import user_init
 import access_wishes
 
+def get_path(relative_path):
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(BASE_DIR, relative_path)
 
 load_fonts()
 
-# st.image("img/title.png")
-
-# 현재 실행 중인 파일의 디렉토리 확인
-current_dir = os.path.dirname(os.path.abspath(__file__))
-image_path = os.path.join(current_dir, "img", "title.png")
-
-# 파일이 존재하는지 확인 후 로드
-if os.path.exists(image_path):
-    st.image(image_path)
-else:
-    st.error(f"⚠️ Image not found at {image_path}")
-
+st.image(get_path("img/title.png"))
 
 if "page" not in st.session_state:
     st.session_state["page"] = "home"
