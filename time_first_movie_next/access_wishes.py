@@ -6,6 +6,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from utils.utils import new_session, running_min, dict_ott
 warnings.filterwarnings('ignore')
@@ -28,7 +29,18 @@ def load_user_key():
 def scrape_wishes(user_key):
     """유저의 '보고싶어요' 목록 접근"""
 
-    driver = webdriver.Chrome()
+    # driver = webdriver.Chrome()
+
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless') 
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu') 
+    
+    CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
+    service = Service(CHROMEDRIVER_PATH)
+    driver = webdriver.Chrome(service=service, options=options)
+    
     url = f'https://pedia.watcha.com/ko-KR/users/{user_key}/contents/movies/wishes?order=runtime_short'
     driver.get(url)
     time.sleep(2)
