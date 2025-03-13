@@ -1,7 +1,7 @@
 import streamlit as st
 st.set_page_config(
     page_title="Time First Movie Next",
-    page_icon="🎬"
+    page_icon="🍿"
 )
 from utils_streamlit import is_email, is_error, category, otts, load_fonts
 import pandas as pd
