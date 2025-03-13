@@ -14,8 +14,15 @@ import access_wishes
 load_fonts()
 
 # st.image("img/title.png")
-with open("img/title.png", "rb") as file:
-    st.image(file)
+
+# 현재 작업 디렉토리 확인
+st.write("Current Directory:", os.getcwd())
+
+# img 폴더가 있는지 확인
+if os.path.exists("img"):
+    st.write("Files in 'img':", os.listdir("img"))
+else:
+    st.error("⚠️ 'img' directory not found!")
 
 
 if "page" not in st.session_state:
