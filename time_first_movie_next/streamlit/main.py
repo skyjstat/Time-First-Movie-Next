@@ -13,7 +13,9 @@ import access_wishes
 
 load_fonts()
 
-st.image("img/title.png")
+# st.image("img/title.png")
+with open("img/title.png", "rb") as file:
+    st.image(file)
 
 
 if "page" not in st.session_state:
