@@ -84,29 +84,6 @@ def load_fonts():
                 font-weight: 500;
                 margin-top: 3px;
             }
-
-            .custom-button {
-                background-color: #ffffff; /* 연한 회색 배경 */
-                color: gray; /* 검은색 글씨 */
-                border: none; /* 테두리 없음 */
-                padding: 12px 20px; /* 내부 여백 */
-                font-size: 16px; /* 글꼴 크기 */
-                font-weight: bold; /* 글씨 굵게 */
-                border-radius: 30px; /* 둥근 모서리 */
-                cursor: pointer; /* 마우스 커서 변경 */
-                transition: background-color 0.3s ease, transform 0.1s ease; /* 부드러운 전환 효과 */
-                display: inline-block; /* 크기 조정 가능 */
-                text-align: center;
-            }
-            /* 호버 효과 */
-            .custom-button:hover {
-                background-color: #BDBDBD; /* 조금 더 진한 회색 */
-            }
-            /* 클릭(활성화) 효과 */
-            .custom-button:active {
-                background-color: #9E9E9E; /* 더 진한 회색 */
-                transform: scale(0.98); /* 살짝 눌리는 효과 */
-            }
         </style>
         """,
         unsafe_allow_html=True
