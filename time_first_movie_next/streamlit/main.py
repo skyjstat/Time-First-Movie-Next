@@ -12,13 +12,23 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import user_init
 import access_wishes
 
+options = webdriver.ChromeOptions()
+options.add_argument('--headless') 
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
+options.add_argument('--disable-gpu') 
+CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
+service = Service(CHROMEDRIVER_PATH)
+
 def get_path(relative_path):
     BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
     return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
 
 load_fonts()
 
+
 st.image(get_path("img/title.png"))
+
 
 if "page" not in st.session_state:
     st.session_state["page"] = "home"
@@ -88,16 +98,7 @@ def RegisterPage():
         
     user_email = st.session_state["user_email_register"]
     user_pw = st.session_state["user_pw_register"]
-    # driver = webdriver.Chrome()
-
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless') 
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--disable-gpu') 
-    
-    CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
-    service = Service(CHROMEDRIVER_PATH)
+    # driver = webdriver.Chrome()    
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
@@ -172,7 +173,8 @@ def GatherPage():
 
     try:
         with st.spinner("🕶️ '보고싶어요' 목록 수집 중... (30초 정도 소요돼요)"):
-            contents = access_wishes.scrape_wishes(user_key)
+            driver = webdriver.Chrome(service=service, options=options)
+            contents = access_wishes.scrape_wishes(driver, user_key)
         st.success(f"🕶️ 작품 {len(contents)}개 수집 완료!")
 
         with st.spinner("🎭 작품 정보 읽어오는 중... (처음일 경우 5분 이상 소요될 수 있어요)"):
