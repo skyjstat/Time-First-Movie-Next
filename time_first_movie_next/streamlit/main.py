@@ -6,7 +6,7 @@ import sys
 import os
 import json
 import algpy
-# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from time_first_movie_next import user_init, access_wishes
 
 def get_path(relative_path):
