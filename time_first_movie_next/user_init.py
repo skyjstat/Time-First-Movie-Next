@@ -17,6 +17,11 @@ from utils.utils import is_error
 warnings.filterwarnings('ignore')
 
 
+def get_path(relative_path):
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
+    return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
+
+
 def login(driver, user_email, user_pw):
     """왓챠피디아 로그인"""
 
@@ -62,12 +67,12 @@ def get_user_key(driver):
 def save_user_info(user_email, user_key):
     """유저 정보 (ID, 키) 저장"""
 
-    with open("data/user/user_info.json", "r") as f:
+    with open(get_path("data/user/user_info.json"_, "r") as f:
         user_info = json.load(f)
 
     user_info[user_email] = user_key
     pd.DataFrame(columns=['content_id', 'title_ko', 'title_en', 'running_min', 'running_time', 'year', 'country', 'age', 'ott_img', 'ott_tag', 'avg_score', 'img'])\
-        .to_csv(f"data/raw/data_{user_key}.csv")
+        .to_csv(get_path(f"data/raw/data_{user_key}.csv"))
 
-    with open("data/user/user_info.json", "w") as f:
+    with open(get_path("data/user/user_info.json"), "w") as f:
         json.dump(user_info, f)
