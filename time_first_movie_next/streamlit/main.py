@@ -87,20 +87,22 @@ def RegisterPage():
     user_email = st.session_state["user_email_register"]
     user_pw = st.session_state["user_pw_register"]
 
+    from selenium import webdriver
+    from selenium.common.exceptions import TimeoutException
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.firefox.options import Options
+    from selenium.webdriver.firefox.service import Service
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.support.ui import WebDriverWait
+    from webdriver_manager.firefox import GeckoDriverManager
 
-    from selenium.webdriver.chrome.service import Service
-    from webdriver_manager.chrome import ChromeDriverManager
-    
-    # Chrome 옵션 설정
-    options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # GUI 없이 실행 (필수)
-    options.add_argument('--no-sandbox')  # 샌드박스 비활성화
-    options.add_argument('--disable-dev-shm-usage')  # 메모리 부족 문제 방지
-    options.add_argument('--disable-gpu')  # GPU 가속 비활성화
-    
-    # ChromeDriver 실행
-    service = Service(ChromeDriverManager().install())  # 최신 버전 자동 설치
-    driver = webdriver.Chrome(service=service, options=options)
+    firefoxOptions = Options()
+    firefoxOptions.add_argument("--headless")
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(
+        options=firefoxOptions,
+        service=service,
+    )
 
     try:
         with st.spinner("[1/3] 🍿 왓챠피디아 로그인 중..."):
