@@ -50,7 +50,7 @@ def scrape_wishes(driver, user_key):
     raw = soup.find_all("li", class_="zK9dEEA5")
     contents = [r.find("a").get("href").split('/')[-1] for r in raw]
 
-    driver.quit()
+    # driver.quit()
 
     return contents
 
