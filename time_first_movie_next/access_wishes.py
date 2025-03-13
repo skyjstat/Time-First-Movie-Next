@@ -11,9 +11,14 @@ from utils.utils import new_session, running_min, dict_ott
 warnings.filterwarnings('ignore')
 
 
+def get_path(relative_path):
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
+    return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
+
+
 def load_user_key():
     user_email = input('왓챠피디아 ID : ')
-    with open("data/user/user_info.json", "r") as f:
+    with open(get_path("data/user/user_info.json"), "r") as f:
         user_info = json.load(f)
     user_key = user_info[user_email]
 
@@ -22,9 +27,6 @@ def load_user_key():
 
 def scrape_wishes(user_key):
     """유저의 '보고싶어요' 목록 접근"""
-
-    # options = webdriver.ChromeOptions()
-    # options.add_argument("--headless")
 
     driver = webdriver.Chrome()
     url = f'https://pedia.watcha.com/ko-KR/users/{user_key}/contents/movies/wishes?order=runtime_short'
