@@ -26,6 +26,11 @@ def get_path(relative_path):
 
 load_fonts()
 
+st.set_page_config(
+    page_title="Time First Movie Next",
+    page_icon="🎬"
+)
+
 
 st.image(get_path("img/title.png"))
 
