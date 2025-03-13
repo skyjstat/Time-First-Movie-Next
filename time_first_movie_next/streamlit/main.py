@@ -141,7 +141,7 @@ def ProloguePage():
         if is_error(pd.read_csv, get_path(f"../data/processed/df_{user_key}.csv")):
             col1.warning("처음이라면 '보고싶어요' 목록 업데이트가 필요해요.")
         else:
-            st.session_state["df"] = pd.read_csv(f"../data/processed/df_{user_key}.csv", index_col=0)
+            st.session_state["df"] = pd.read_csv(get_path(f"../data/processed/df_{user_key}.csv"), index_col=0)
             st.session_state["page"] = "page_algorithm"
             st.rerun()
 
