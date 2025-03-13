@@ -18,6 +18,8 @@ load_fonts()
 
 st.image(get_path("img/title.png"))
 
+st.write(get_path("../data/user/user_info.json"))
+
 if "page" not in st.session_state:
     st.session_state["page"] = "home"
 
