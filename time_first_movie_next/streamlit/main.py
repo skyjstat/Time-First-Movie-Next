@@ -14,23 +14,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import user_init
 import access_wishes
 
-import subprocess
-
-
-def get_version(command):
-    try:
-        return subprocess.check_output(command, shell=True, text=True).strip()
-    except Exception as e:
-        return f"Error: {str(e)}"
-
-st.title("Streamlit Cloud - Chrome & ChromeDriver 버전 확인")
-
-chrome_version = get_version("google-chrome --version || chromium --version")
-chromedriver_version = get_version("chromedriver --version")
-
-st.write("**Chrome 버전:**", chrome_version)
-st.write("**ChromeDriver 버전:**", chromedriver_version)
-
 def get_path(relative_path):
     BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
     return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
@@ -109,16 +92,18 @@ def RegisterPage():
     user_pw = st.session_state["user_pw_register"]
     # driver = webdriver.Chrome()
 
+    # Chrome 옵션 설정
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # GUI 없이 실행
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--disable-gpu')
+    options.add_argument('--headless')  # Streamlit Cloud는 GUI 환경이 없으므로 필수
+    options.add_argument('--no-sandbox')  # 권한 문제 방지
+    options.add_argument('--disable-dev-shm-usage')  # 메모리 부족 문제 방지
+    options.add_argument('--disable-gpu')  # GPU 가속 비활성화
     
-    # ChromeDriver 서비스 설정
-    service = Service(ChromeDriverManager().install())
+    # ChromeDriver 경로 지정 (Streamlit Cloud에서는 보통 `/usr/bin/chromedriver`)
+    CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
     
-    # WebDriver 객체 생성
+    # WebDriver 실행
+    service = Service(CHROMEDRIVER_PATH)
     driver = webdriver.Chrome(service=service, options=options)
 
     try:
