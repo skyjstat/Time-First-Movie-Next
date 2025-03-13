@@ -86,7 +86,9 @@ def RegisterPage():
         
     user_email = st.session_state["user_email_register"]
     user_pw = st.session_state["user_pw_register"]
-    driver = webdriver.Chrome()
+
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(options=options)
 
     try:
         with st.spinner("[1/3] 🍿 왓챠피디아 로그인 중..."):
