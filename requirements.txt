@@ -1,0 +1,7 @@
+selenium
+requests
+streamlit_javascript
+pandas
+numpy
+pillow
+beautifulsoup4
