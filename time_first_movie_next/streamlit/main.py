@@ -2,10 +2,8 @@ import streamlit as st
 from utils_streamlit import is_email, is_error, category, otts, load_fonts
 import pandas as pd
 from selenium import webdriver
-
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
-
+# from webdriver_manager.chrome import ChromeDriverManager
 import sys
 import os
 import json
@@ -92,17 +90,13 @@ def RegisterPage():
     user_pw = st.session_state["user_pw_register"]
     # driver = webdriver.Chrome()
 
-    # Chrome 옵션 설정
     options = webdriver.ChromeOptions()
-    options.add_argument('--headless')  # Streamlit Cloud는 GUI 환경이 없으므로 필수
-    options.add_argument('--no-sandbox')  # 권한 문제 방지
-    options.add_argument('--disable-dev-shm-usage')  # 메모리 부족 문제 방지
-    options.add_argument('--disable-gpu')  # GPU 가속 비활성화
+    options.add_argument('--headless') 
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu') 
     
-    # ChromeDriver 경로 지정 (Streamlit Cloud에서는 보통 `/usr/bin/chromedriver`)
     CHROMEDRIVER_PATH = "/usr/bin/chromedriver"
-    
-    # WebDriver 실행
     service = Service(CHROMEDRIVER_PATH)
     driver = webdriver.Chrome(service=service, options=options)
 
