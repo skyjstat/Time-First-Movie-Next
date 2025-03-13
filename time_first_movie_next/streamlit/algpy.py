@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_image_select import image_select
 import pandas as pd
 from utils_streamlit import process_image, is_error, category, load_fonts
 from streamlit_javascript import st_javascript
