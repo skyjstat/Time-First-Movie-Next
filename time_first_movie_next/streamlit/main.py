@@ -87,6 +87,7 @@ def RegisterPage():
     user_email = st.session_state["user_email_register"]
     user_pw = st.session_state["user_pw_register"]
 
+    options = webdriver.ChromeOptions()
     options.add_argument('--headless')
     driver = webdriver.Chrome(options=options)
 
