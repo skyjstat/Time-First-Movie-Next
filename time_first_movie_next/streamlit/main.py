@@ -14,7 +14,6 @@ def get_path(relative_path):
     BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
     return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
 
-
 load_fonts()
 
 st.image(get_path("img/title.png"))
