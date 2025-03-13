@@ -99,7 +99,7 @@ def RegisterPage():
     firefoxOptions = Options()
     firefoxOptions.add_argument("--headless")
     service = Service(GeckoDriverManager().install())
-    driver = webdriver.Firefox(
+    driver = webdriver.firefox(
         options=firefoxOptions,
         service=service,
     )
