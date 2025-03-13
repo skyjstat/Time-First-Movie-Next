@@ -1,7 +1,5 @@
 import streamlit as st
-from streamlit_image_select import image_select
 from utils_streamlit import is_email, is_error, category, otts, load_fonts
-# import fonts_streamlit
 import pandas as pd
 from selenium import webdriver
 import sys
