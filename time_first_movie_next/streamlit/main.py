@@ -11,8 +11,9 @@ import user_init
 import access_wishes
 
 def get_path(relative_path):
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    return os.path.join(BASE_DIR, relative_path)
+    BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
+    return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
+
 
 load_fonts()
 
@@ -33,7 +34,7 @@ def InitialPage():
         unsafe_allow_html=True
     )
 
-    with open(get_path("data/user/user_info.json"), "r") as f:
+    with open(get_path("../data/user/user_info.json"), "r") as f:
         user_info = json.load(f)
     
     col1, col2 = st.columns([1, 1])
@@ -76,7 +77,7 @@ def InitialPage():
             
 
 def RegisterPage():
-    with open(get_path("data/user/user_info.json"), "r") as f:
+    with open(get_path("../data/user/user_info.json"), "r") as f:
         user_info = json.load(f)
     
     user_email = st.session_state["user_email_register"]
@@ -100,18 +101,13 @@ def RegisterPage():
         st.warning("❕유저 키 수집 실패: 관리자에게 문의하세요.")
         st.write(e)
 
-    with open(get_path("data/user/user_info.json"), "r") as f:
+    with open(get_path("../data/user/user_info.json"), "r") as f:
         user_info = json.load(f)
 
     user_info[user_email] = user_key
     pd.DataFrame(columns=['content_id', 'title_ko', 'title_en', 'running_min', 'running_time', 'year', 'country', 'age', 'ott_img', 'ott_tag', 'avg_score', 'img'])\
-        .to_csv(get_path(f"data/raw/df_{user_key}.csv"))
+        .to_csv(get_path(f"../data/raw/df_{user_key}.csv"))
 
-    with open(get_path("data/user/user_info.json"), "w") as f:
+    with open(get_path("../data/user/user_info.json"), "w") as f:
         json.dump(user_info, f)
     st.success("[3/3] 👋🏻 유저 정보 저장 완료!")
-
-if st.session_state["page"] == "home":
-    InitialPage()
-elif st.session_state["page"] == "page_register":
-    RegisterPage()
