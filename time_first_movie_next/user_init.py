@@ -11,7 +11,6 @@ import os
 import time
 import warnings
 import pandas as pd
-from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from utils.utils import is_error 
