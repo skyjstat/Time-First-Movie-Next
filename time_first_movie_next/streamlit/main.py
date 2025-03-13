@@ -2,6 +2,10 @@ import streamlit as st
 from utils_streamlit import is_email, is_error, category, otts, load_fonts
 import pandas as pd
 from selenium import webdriver
+
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 import sys
 import os
 import json
@@ -86,23 +90,19 @@ def RegisterPage():
         
     user_email = st.session_state["user_email_register"]
     user_pw = st.session_state["user_pw_register"]
+    # driver = webdriver.Chrome()
 
-    from selenium import webdriver
-    from selenium.common.exceptions import TimeoutException
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.firefox.options import Options
-    from selenium.webdriver.firefox.service import Service
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.support.ui import WebDriverWait
-    from webdriver_manager.firefox import GeckoDriverManager
-
-    firefoxOptions = Options()
-    firefoxOptions.add_argument("--headless")
-    service = Service(GeckoDriverManager().install())
-    driver = webdriver.firefox(
-        options=firefoxOptions,
-        service=service,
-    )
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')  # GUI 없이 실행
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-gpu')
+    
+    # ChromeDriver 서비스 설정
+    service = Service(ChromeDriverManager().install())
+    
+    # WebDriver 객체 생성
+    driver = webdriver.Chrome(service=service, options=options)
 
     try:
         with st.spinner("[1/3] 🍿 왓챠피디아 로그인 중..."):
