@@ -72,28 +72,3 @@ def save_user_info(user_email, user_key):
 
     with open("data/user/user_info.json", "w") as f:
         json.dump(user_info, f)
-
-
-# def main():
-#     user_email = input('왓챠피디아 ID : ')
-#     user_pw = input('왓챠피디아 PW : ')
-
-#     driver = webdriver.Chrome()
-
-#     try:
-#         # 로그인 & 유저 키 수집
-#         login(driver, user_email, user_pw)
-#         user_key = get_user_key(driver)
-
-#         # 유저 정보 저장
-#         save_user_info(user_email, user_key)
-
-#     except Exception as e:
-#         print(f"🚨 오류 발생: {e}")
-
-#     finally:
-#         driver.quit()
-
-
-# if __name__ == "__main__":
-#     main()
