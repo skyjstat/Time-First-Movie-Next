@@ -15,14 +15,15 @@ load_fonts()
 
 # st.image("img/title.png")
 
-# 현재 작업 디렉토리 확인
-st.write("Current Directory:", os.getcwd())
+# 현재 실행 중인 파일의 디렉토리 확인
+current_dir = os.path.dirname(os.path.abspath(__file__))
+image_path = os.path.join(current_dir, "img", "title.png")
 
-# img 폴더가 있는지 확인
-if os.path.exists("img"):
-    st.write("Files in 'img':", os.listdir("img"))
+# 파일이 존재하는지 확인 후 로드
+if os.path.exists(image_path):
+    st.image(image_path)
 else:
-    st.error("⚠️ 'img' directory not found!")
+    st.error(f"⚠️ Image not found at {image_path}")
 
 
 if "page" not in st.session_state:
