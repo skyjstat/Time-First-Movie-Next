@@ -54,8 +54,6 @@ def scrape_wishes(user_key):
 def update_data(user_key, df, contents):
     """기존 데이터와 비교 후 업데이트"""
 
-    # df = pd.read_csv(f'data/raw/df_{user_key}.csv', index_col=0)
-
     existing_contents = set(df['content_id'].tolist())
     contents_to_add = list(set(contents) - existing_contents)
     contents_to_remove = list(existing_contents - set(contents))
@@ -96,8 +94,6 @@ def update_data(user_key, df, contents):
         except:
             continue
 
-    # df.to_csv(f'data/raw/df_{user_key}.csv')
-
     return df
 
 
@@ -116,8 +112,6 @@ def runningtime_categories(df, user_key):
                                   '2시간 ~ 2시간 30분', '2시간 30분 ~ 3시간', '3시간 ~ 3시간 30분', '3시간 30분 이상']))
     df_final['category_1d'] = df_final['time_type1'].map(dict_cat)
     df_final['category_2d'] = df_final['time_type2'] - df_final['time_type1']
-
-    # df_final.to_csv(f"data/processed/df_{user_key}.csv")
 
     return df_final
 
