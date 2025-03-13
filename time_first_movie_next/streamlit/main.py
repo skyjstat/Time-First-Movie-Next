@@ -175,6 +175,7 @@ def GatherPage():
         with st.spinner("🕶️ '보고싶어요' 목록 수집 중... (30초 정도 소요돼요)"):
             driver = webdriver.Chrome(service=service, options=options)
             contents = access_wishes.scrape_wishes(driver, user_key)
+            driver.quit()
         st.success(f"🕶️ 작품 {len(contents)}개 수집 완료!")
 
         with st.spinner("🎭 작품 정보 읽어오는 중... (처음일 경우 5분 이상 소요될 수 있어요)"):
