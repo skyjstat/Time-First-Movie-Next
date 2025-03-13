@@ -67,7 +67,7 @@ def get_user_key(driver):
 def save_user_info(user_email, user_key):
     """유저 정보 (ID, 키) 저장"""
 
-    with open(get_path("data/user/user_info.json"_, "r") as f:
+    with open(get_path("data/user/user_info.json"), "r") as f:
         user_info = json.load(f)
 
     user_info[user_email] = user_key
