@@ -14,6 +14,23 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import user_init
 import access_wishes
 
+import subprocess
+
+
+def get_version(command):
+    try:
+        return subprocess.check_output(command, shell=True, text=True).strip()
+    except Exception as e:
+        return f"Error: {str(e)}"
+
+st.title("Streamlit Cloud - Chrome & ChromeDriver 버전 확인")
+
+chrome_version = get_version("google-chrome --version || chromium --version")
+chromedriver_version = get_version("chromedriver --version")
+
+st.write("**Chrome 버전:**", chrome_version)
+st.write("**ChromeDriver 버전:**", chromedriver_version)
+
 def get_path(relative_path):
     BASE_DIR = os.path.abspath(os.path.dirname(__file__)) 
     return os.path.normpath(os.path.join(BASE_DIR, relative_path)) 
